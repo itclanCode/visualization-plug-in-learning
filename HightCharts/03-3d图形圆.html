@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>03-3d图形圆</title>
+<meta name="description" content="" author="随笔川迹" personQQ="1046678249">
+<meta name="keywords" content="" weChatPublicId="itclanCoder">
+<link href="" rel="stylesheet">
+<style>
+	   *{
+			margin:0;
+			padding:0;
+		}
+		#weather{
+			width:500px;
+			height:300px;
+			margin:100px auto;
+		}
+	</style>
+</head>
+<body>
+      
+
+      <div id="weather"></div>
+      <!-- 引入jquery -->
+      <script type="text/javascript" src="js/jquery.1.9.1.min.js"></script>
+      <script type="text/javascript" src="js/highcharts.js"></script>
+      <script type="text/javascript">
+      	       $("#weather").highcharts({
+      	       	   chart:{
+      	       	   	  type:'pie',// 图形图表
+      	       	   	  options3d:{
+      	       	   	  	enabled:true,
+      	       	   	  	alpha:45,  // 围绕x轴旋转的度数
+      	       	   	  	beta:0,    // 围绕y轴旋转的度数
+      	       	   	  	// depth:50, // 图表的深度
+      	       	   	  }
+      	       	   },
+      	       	   title:{
+      	       	   	  text:'2018年各个浏览器的使用比例'
+      	       	   },
+      	       	   plotOptions:{
+      	       	   	   pie:{
+      	       	   	   	  allowPointSelect:true, // 是否允许选择
+      	       	   	   	  cursor:"pointer",   // 鼠标移上去实现手的形状
+      	       	   	      depth:50   // 3D视图的深度
+      	       	   	   }
+      	       	   },
+      	       	   series:[{
+                       type:'pie',
+                       name:'浏览器的比例',
+                       data:[
+                          ['IE',52.17],
+                          ['Firefox',11.68],
+                          {
+                          	name:'chrome',
+                          	y:29.49,
+                          	sliced:true, // 默认选中
+                          	selected:true
+                          },
+                          ["safari",4.97],
+                          ['Opera',1.27],
+                          ['Others',0.42]
+                       ]
+
+      	       	   }]
+      	       })
+      </script>
+</body>
+</html>

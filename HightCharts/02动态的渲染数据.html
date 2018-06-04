@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>02动态的渲染数据</title>
+    <meta name="description" content="" author="随笔川迹" personQQ="1046678249">
+    <meta name="keywords" content="" weChatPublicId="itclanCoder">
+    <link href="" rel="stylesheet">
+    <style type="text/css">
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    #weather {
+        width: 500px;
+        height: 300px;
+        margin: 100px auto;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="weather"></div>
+    <!-- 引入jquery -->
+    <script type="text/javascript" src="js/jquery.1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/highcharts.js"></script>
+    <script type="text/javascript">
+    $("#weather").highcharts({
+        //设置图表的详细参数
+        chart: {
+            //设置为一条平滑曲线
+            type: "spline",
+            events: {
+                load: function() {
+                    //console.log(this);
+                    //console.log(arguments);
+                    //获取需要设置的series
+                    var series = this.series[0];
+                    //通过ajax一步请求数据动态添加
+                    /*$.get("xxx/json",function(res){
+                    	series.addPoint({
+                    		x: res.x,
+                    		y: res.y
+                    	},true,true)
+                    })*/
+
+                    //静态数据渲染
+                    var i = 10;
+                    setInterval(function() {
+                        series.addPoint({
+                            x: i++,
+                            y: Math.random()
+                        }, true, true) //第一个true代表重绘(默认值) 第二个true指代移除第一个数据
+                    }, 1000);
+                }
+            }
+        },
+        series: [{
+            data: (function() {
+                var result = [];
+                for (var i = 0; i < 10; i++) {
+                    result.push({
+                        x: i,
+                        y: Math.random()
+                    });
+                }
+                //console.log(result);
+                return result
+            })()
+        }]
+    });
+    </script>
+</body>
+
+</html>
